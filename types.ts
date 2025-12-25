@@ -97,7 +97,7 @@ export const DEFAULT_DATA: WeddingData = {
   location: {
     name: { en: 'Akasaka Area', ja: '赤坂エリア', my: 'Akasaka Area' },
     address: { en: 'Minato City, Tokyo', ja: '東京都港区', my: 'Minato City, Tokyo' },
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25809.846975017903!2d139.342528!3d36.039071!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601ed5a07c3772c9%3A0x9f9dba834e8caf26!2z4YCG4YCs4YCQ4YCt4YCv4YC44YCb4YCu4YCd4YCt4YCf4YCs4YCbIOGAmeGAvOGAlOGAuuGAmeGArOGAmOGAr-GAlOGAuuGAuOGAgOGAu-GAseGArOGAhOGAuuGAuA!5e0!3m2!1sen!2sjp!4v1766648514831!5m2!1sen!2sjp'
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15478190.520213367!2d86.00218897291113!3d18.715303975109244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x305652a7714e2907%3A0xba7b0ee41c622b11!2sMyanmar%20(Burma)!5e0!3m2!1sen!2sjp!4v1766656583542!5m2!1sen!2sjp'
   },
   message: {
     en: "We invite you to share in our joy as we exchange marriage vows.",

@@ -77,19 +77,9 @@ const hexToRgb = (hex: string) => {
   return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : '0 0 0';
 };
 
-// Simplified Logic: Trust the user's input. 
-// If it's an iframe tag, extract src. Otherwise, assume it is a valid URL.
+// Simplified Logic: Trust the user's input. Assume valid embed URLs.
 const ensureEmbedUrl = (url: string): string => {
   if (!url) return '';
-  
-  // Case 1: User pasted the full <iframe ... src="..."> code
-  if (url.includes('<iframe')) {
-      const match = url.match(/src="([^"]+)"/);
-      if (match) return match[1];
-  }
-  
-  // Case 2: Trust the user input. 
-  // We removed the logic that rewrites URLs into search queries, as this causes issues on mobile.
   return url.trim();
 };
 

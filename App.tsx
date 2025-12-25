@@ -175,12 +175,14 @@ const App: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     const eventParam = params.get('event');
     
-    // Build the data filename based on event parameter
-    let dataFile = './wedding-data.json';
+    // Build the data filename based on event parameter (use BASE_URL so fetch is root-relative)
+    const baseUrl = import.meta.env.BASE_URL || '/';
+    const basePath = baseUrl.endsWith('/') ? baseUrl.slice(0, -1) : baseUrl;
+    let dataFile = `${basePath}/wedding-data.json`;
     if (eventParam) {
       // Convert dots to underscores for filename: aki.mimi -> aki_mimi
       const eventFileName = eventParam.replace(/\./g, '_');
-      dataFile = `./wedding-data_${eventFileName}.json`;
+      dataFile = `${basePath}/wedding-data_${eventFileName}.json`;
     }
 
     // Client-side cache/version strategy
@@ -232,7 +234,7 @@ const App: React.FC = () => {
         const contentType = (res.headers.get("content-type") || '').toLowerCase();
         if (contentType.includes('text/html')) {
           const body = await res.text();
-          console.warn("External config fetch returned HTML (likely a 404 rewrite to index.html).\nStatus:", res.status, "Snippet:", body.slice(0, 300));
+          console.warn("External config fetch returned HTML (likely a 404 rewrite to index.html). URL:", dataFileUrl, "Status:", res.status, "Snippet:", body.slice(0, 300));
           throw new Error("Invalid external config (HTML received)");
         }
 
@@ -378,7 +380,9 @@ const App: React.FC = () => {
   const processFaqText = (text: string) => {
     let processed = text;
     if (processed.includes('{{time}}')) processed = processed.replace(/{{time}}/g, dateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: lang !== 'ja' }));
-    if (processed.includes('{{deadline}}')) processed = processed.replace(/{{deadline}}/g, new Date(data.rsvpDeadline).toLocaleDateString());
+    if (processed.includes('{{rsvpDeadline}}')) processed = processed.replace(/{{rsvpDeadline}}/g, new Date(data.rsvpDeadline).toLocaleDateString());
+    if (processed.includes('{{start_time}}')) processed = processed.replace(/{{start_time}}/g, data.start_time || '11:00');
+    if (processed.includes('{{end_time}}')) processed = processed.replace(/{{end_time}}/g, data.end_time || '13:00');
     return processed;
   };
 

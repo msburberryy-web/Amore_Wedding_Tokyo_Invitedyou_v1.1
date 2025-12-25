@@ -116,7 +116,7 @@ const replacePhotoPathsWithEventFolder = (data: WeddingData, eventParam: string 
 
 const App: React.FC = () => {
   const [data, setData] = useState<WeddingData>(DEFAULT_DATA);
-  const [lang, setLang] = useState<Language>('my');
+  const [lang, setLang] = useState<Language>('en');
   
   // App Modes
   const [isAdminAvailable, setIsAdminAvailable] = useState(false);

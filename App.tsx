@@ -77,6 +77,21 @@ const hexToRgb = (hex: string) => {
   return result ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}` : '0 0 0';
 };
 
+// Simplified Logic: Trust the user's input. 
+// If it's an iframe tag, extract src. Otherwise, assume it is a valid URL.
+const ensureEmbedUrl = (url: string): string => {
+  if (!url) return '';
+  
+  // Case 1: User pasted the full <iframe ... src="..."> code
+  if (url.includes('<iframe')) {
+      const match = url.match(/src="([^"]+)"/);
+      if (match) return match[1];
+  }
+  
+  // Case 2: Trust the user input. 
+  // We removed the logic that rewrites URLs into search queries, as this causes issues on mobile.
+  return url.trim();
+};
 
 const replacePhotoPathsWithEventFolder = (data: WeddingData, eventParam: string | null): WeddingData => {
   if (!eventParam) return data; // No event param, return data as-is
@@ -101,7 +116,7 @@ const replacePhotoPathsWithEventFolder = (data: WeddingData, eventParam: string 
 
 const App: React.FC = () => {
   const [data, setData] = useState<WeddingData>(DEFAULT_DATA);
-  const [lang, setLang] = useState<Language>('en');
+  const [lang, setLang] = useState<Language>('my');
   
   // App Modes
   const [isAdminAvailable, setIsAdminAvailable] = useState(false);
@@ -240,13 +255,16 @@ const App: React.FC = () => {
       .then(externalData => {
         console.log("Loaded wedding configuration");
         // Merge to ensure no missing keys
+        // Prioritize external mapUrl if it exists. Fallback to default only if missing in JSON.
+        const rawMapUrl = externalData.location?.mapUrl || DEFAULT_DATA.location.mapUrl;
+        
         let merged = { 
           ...DEFAULT_DATA, 
           ...externalData,
           location: { 
             ...DEFAULT_DATA.location, 
             ...(externalData.location || {}),
-            mapUrl: externalData.location?.mapUrl || DEFAULT_DATA.location.mapUrl
+            mapUrl: ensureEmbedUrl(rawMapUrl)
           },
           images: { ...DEFAULT_DATA.images, ...(externalData.images || {}) },
           theme: { ...DEFAULT_DATA.theme, ...(externalData.theme || {}) },

@@ -97,7 +97,7 @@ export const DEFAULT_DATA: WeddingData = {
   location: {
     name: { en: 'Akasaka Area', ja: '赤坂エリア', my: 'Akasaka Area' },
     address: { en: 'Minato City, Tokyo', ja: '東京都港区', my: 'Minato City, Tokyo' },
-    mapUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.1611203892307!2d139.7036731752753!3d35.69765252907259!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188cd8b5b7ac67%3A0x9ce2f5afc23c6d3a!2sWedding%26Party%20BATUR%20Tokyo!5e0!3m2!1sen!2sjp!4v1766565748294!5m2!1sen!2sjp'
+    mapUrl: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d25809.846975017903!2d139.342528!3d36.039071!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601ed5a07c3772c9%3A0x9f9dba834e8caf26!2z4YCG4YCs4YCQ4YCt4YCv4YC44YCb4YCu4YCd4YCt4YCf4YCs4YCbIOGAmeGAvOGAlOGAuuGAmeGArOGAmOGAr-GAlOGAuuGAuOGAgOGAu-GAseGArOGAhOGAuuGAuA!5e0!3m2!1sen!2sjp!4v1766648514831!5m2!1sen!2sjp'
   },
   message: {
     en: "We invite you to share in our joy as we exchange marriage vows.",
